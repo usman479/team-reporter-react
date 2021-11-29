@@ -7,7 +7,7 @@ export const addButton = { fontSize: "30px" }
 
 const Home = () => {
 
-    const [top, setTop] = useState(600);
+    const [top, setTop] = useState(500);
 
     return (
         <div>
@@ -17,8 +17,8 @@ const Home = () => {
                 </Col>
                 <Col align="right">
                     <Affix offsetTop={top}>
-                    <Button type="primary" onClick={() => setTop(top + 10)}>
-                        Affix top
+                    <Button type="primary">
+                        Create team
                     </Button>
                 </Affix>
 
@@ -27,8 +27,6 @@ const Home = () => {
                 <br />
 
             </Row>
-
-
         </div>
     )
 }
