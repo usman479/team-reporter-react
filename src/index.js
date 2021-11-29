@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css';
 import { Row, Col, Divider } from 'antd';
-
+import firebase from 'firebase/compat/app'
+import firebaseConfig from './firebase/firebaseConfig';
 
 const style = { background: '#0092ff', padding: '8px 10px' };
 
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
 <App/>

@@ -1,15 +1,37 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
-import { Form, Input, Button, Checkbox, Row,Col } from 'antd';
+import { Form, Input, Button, Row,Col } from 'antd';
 import { UserOutlined, LockOutlined ,MailOutlined} from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import { greenButton,paddingInput,heading } from './Login';
 
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const signFunction = (email,password)=>{
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log('success',user)
+    // ...
+  })
+  .catch((error) => {
+    // const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    alert(errorMessage)
+  });
+}
 const Signup = () => {
+
     const onFinish = values => {
         console.log('Received values of form: ', values);
+        const {email, password} = values;
+        signFunction(email,password);
+      };
+      const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+
       };
     
       return (
@@ -24,6 +46,7 @@ const Signup = () => {
             remember: true,
           }}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             name="username"
@@ -66,7 +89,10 @@ const Signup = () => {
           </Form.Item>
     
           <Form.Item>
-            <Button size={{size:"large"}} type="primary" style={greenButton}><Link to="/home">Signup</Link></Button> 
+            <Button size={{size:"large"}} type="primary" style={greenButton} htmlType="submit">
+              {/* <Link to="/home">Signup</Link> */}
+              Signup
+              </Button> 
           </Form.Item>
         </Form>
       </Col>
