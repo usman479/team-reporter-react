@@ -12,9 +12,11 @@
 //     appId: "1:774716645491:web:b98e311d977a4dd3110a06"
 //   };
 
-//   const app = initializeApp(firebaseConfig);
-//   const auth = getAuth(app);
-//   const db = getFirestore();
-//   const stateChange = onAuthStateChanged;
 
-//   export {firebaseConfig,auth,db,stateChange};
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const stateChange = onAuthStateChanged;
+  
+  export {firebaseConfig,auth,db,stateChange ,app};
+

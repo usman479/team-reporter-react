@@ -2,9 +2,14 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from '../firebase/Firebase';
+import { useNavigate } from 'react-router-dom';
+const auth = getAuth(app);
+
 
 export const greenButton = { background: "green", borderColor: "green" };
 export const paddingInput = { padding: "5px 2px", fontSize: "30px" }
@@ -12,8 +17,25 @@ export const heading = { fontFamily: "sans-serif", fontSize: "4em", textAlign: "
 
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const onFinish = values => {
     console.log('Received values of form: ', values);
+    signInWithEmailAndPassword(auth, values.username, values.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/home")
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+
   };
 
   return (
@@ -59,7 +81,8 @@ const Login = () => {
           </Form.Item>
           <Col><Form.Item >
             <Button style={{ width: 180 }} type="primary" htmlType="submit" className="login-form-button">
-              <Link to="/home">Log in</Link>
+              {/* <Link to="/home">Log in</Link> */}
+              login
 
             </Button></Form.Item></Col>
 
