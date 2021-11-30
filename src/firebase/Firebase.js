@@ -17,4 +17,4 @@ const firebaseConfig = {
   const db = getFirestore(app);
   const stateChange = onAuthStateChanged;
   
-  export {firebaseConfig,auth,db,stateChange};
+  export {firebaseConfig,auth,db,stateChange ,app};
